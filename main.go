@@ -17,6 +17,10 @@ func main() {
   })
 
   router.GET("/", controllers.FindAssets)
+  router.GET("/:id", controllers.FindAsset)
+  router.PATCH("/:id", controllers.UpdateAsset)
+  router.POST("/", controllers.CreateAsset)
+  
 
   router.Run()
 }

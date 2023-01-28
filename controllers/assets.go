@@ -66,7 +66,7 @@ func UpdateAsset(c *gin.Context) {
 	  return
 	}
 	
-	updateAsset := models.Asset{Filename: input.Filename, Filesize: input.Filesize, Filetype: input.Filetype}
+	updateAsset := models.Asset{Filename: input.Filename, Filesize: input.Filesize, Filetype: input.Filetype, UpdatedAt: input.UpdatedAt}
 
 	models.DB.Model(&asset).Updates(updateAsset)
   	c.JSON(http.StatusOK, gin.H{"data": updateAsset})

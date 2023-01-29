@@ -47,7 +47,7 @@ func FindAsset(c *gin.Context){
 	c.JSON(http.StatusOK, gin.H{"data": asset})
 }
 
-// PATCH /assets/:id
+// PATCH /:id
 // Update an asset
 func UpdateAsset(c *gin.Context) {
 	// Get model if exist
@@ -70,4 +70,20 @@ func UpdateAsset(c *gin.Context) {
 
 	models.DB.Model(&asset).Updates(updateAsset)
   	c.JSON(http.StatusOK, gin.H{"data": updateAsset})
+}
+
+// DELETE /:id
+// Delete an asset
+func DeleteAsset(c *gin.Context) {
+	// Get model if exist
+	var asset models.Asset
+
+	if err := models.DB.Where("id = ?", c.Param("id")).First(&asset).Error; err != nil {
+	  c.JSON(http.StatusBadRequest, gin.H{"error": "Asset not found!"})
+	  return
+	}
+  
+	models.DB.Delete(&asset)
+  
+	c.JSON(http.StatusOK, gin.H{"data": true})
 }

@@ -20,7 +20,11 @@ func main() {
   router.GET("/:id", controllers.FindAsset)
   router.PATCH("/:id", controllers.UpdateAsset)
   router.POST("/", controllers.CreateAsset)
-  
+  router.DELETE("/:id", controllers.DeleteAsset)
 
-  router.Run()
+  err := router.Run()
+
+  if err != nil {
+	return
+  }
 }
